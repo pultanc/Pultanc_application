@@ -1,0 +1,16 @@
+src/components/profile/UserProfile.tsx:728:                      Series: <span className="font-semibold text-gray-750 dark:text-zinc-205">{ep.seriesTitle}</span>
+src/components/profile/UserProfile.tsx:949:                   <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Series
+src/components/profile/UserProfile.tsx:1096:                <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Series
+src/components/consumer/ConsumerFeed.tsx:4:import { mockSeries } from '../../data';
+src/components/consumer/ConsumerFeed.tsx:1204:  const customSeriesList = dbFunnels.map(funnel => ({
+src/components/consumer/ConsumerFeed.tsx:1223:  let combinedSeries = [...customSeriesList, ...mockSeries];
+src/components/consumer/ConsumerFeed.tsx:1226:    combinedSeries = combinedSeries.sort((a: any, b: any) => {
+src/components/consumer/ConsumerFeed.tsx:1233:  const filteredSeries = combinedSeries.filter(s => 
+src/components/consumer/ConsumerFeed.tsx:1332:        ) : filteredSeries.length > 0 ? (
+src/components/consumer/ConsumerFeed.tsx:1333:          filteredSeries.map(series => (
+src/components/creator/CreatorPortal.tsx:5:import { mockSeries } from '../../data';
+src/components/creator/CreatorPortal.tsx:560:                    {/* Iterate and group by each Series */}
+src/components/creator/CreatorPortal.tsx:561:                    {mockSeries.map((seriesItem) => (
+src/types.ts:9:export interface Series {
+src/data.ts:1:import { Series, LiveCreator } from './types';
+src/data.ts:3:export const mockSeries: Series[] = [

@@ -1,0 +1,6 @@
+{
+  "name": "Pultanc",
+  "description": "Stream premium clips, exclusive live shows, and original creations from top performers, talents, creators, and artists. Tap to watch instantly.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

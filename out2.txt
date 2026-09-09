@@ -1,0 +1,74 @@
+src/components/matrix/TransactionLedger.tsx:51:                      {tx.seriesTitle ? `${tx.seriesTitle.substring(0, 10)}...` : tx.seriesId}
+src/components/matrix/ReportsManager.tsx:36:      // We don't know the collection exactly, let's try 'series' first, then 'funnels', then 'users'
+src/components/matrix/ReportsManager.tsx:37:      const collectionsToTry = ['series', 'funnels', 'users'];
+src/components/matrix/ReportsManager.tsx:62:        const collectionsToTry = ['series', 'funnels', 'users'];
+src/components/profile/UserProfile.tsx:16:  const [activeTab, setActiveTab] = useState<'climers' | 'series' | 'saved' | 'following' | 'followers' | 'settings'>(viewType === 'private' ? 'saved' : 'climers');
+src/components/profile/UserProfile.tsx:728:                      Series: <span className="font-semibold text-gray-750 dark:text-zinc-205">{ep.seriesTitle}</span>
+src/components/profile/UserProfile.tsx:916:                      <div key={item.id || idx} className="w-[85vw] sm:w-[280px] shrink-0 snap-center group cursor-pointer" onClick={() => setActiveTab('series')}>
+src/components/profile/UserProfile.tsx:918:                          <img src={item.thumbnailUrl || 'https://images.unsplash.com/photo-1543807535-eceef0bc6504?auto=format&fit=crop&q=80&w=400'} alt={item.seriesTitle} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+src/components/profile/UserProfile.tsx:928:                        <h4 className="font-bold text-gray-900 text-sm truncate">{item.seriesTitle}</h4>
+src/components/profile/UserProfile.tsx:946:                   onClick={() => setActiveTab('series')}
+src/components/profile/UserProfile.tsx:947:                   className={`flex items-center gap-1.5 text-xs sm:text-sm font-medium pb-4 -mb-[17px] whitespace-nowrap transition-colors ${activeTab === 'series' ? 'text-gray-900 border-b-2 border-black dark:text-white dark:border-white' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'}`}
+src/components/profile/UserProfile.tsx:986:                          seriesTitle: fun.title
+src/components/profile/UserProfile.tsx:1011:              {activeTab === 'series' && (
+src/components/profile/UserProfile.tsx:1093:                onClick={() => setActiveTab('series')}
+src/components/profile/UserProfile.tsx:1094:                className={`flex items-center gap-1.5 text-xs sm:text-sm font-medium pb-4 -mb-[17px] whitespace-nowrap transition-colors ${activeTab === 'series' ? 'text-gray-900 border-b-2 border-black dark:text-white dark:border-white' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'}`}
+src/components/profile/UserProfile.tsx:1130:                        seriesTitle: fun.title
+src/components/profile/UserProfile.tsx:1155:            {activeTab === 'series' && (
+src/components/profile/UserProfile.tsx:1703:                Clip Context: <span className="text-white">{selectedPlayEpisode.seriesTitle}</span>
+src/components/consumer/ConsumerFeed.tsx:11:// FeedPost Component handles individual series as a feed item
+src/components/consumer/ConsumerFeed.tsx:13:  series, 
+src/components/consumer/ConsumerFeed.tsx:18:  series: any, 
+src/components/consumer/ConsumerFeed.tsx:24:  const currentEpisode = series.episodes[currentEpisodeIndex];
+src/components/consumer/ConsumerFeed.tsx:25:  const nextEpisode = series.episodes[currentEpisodeIndex + 1];
+src/components/consumer/ConsumerFeed.tsx:33:  const [isSubscribed, setIsSubscribed] = useState(series.isSubscribed || false);
+src/components/consumer/ConsumerFeed.tsx:44:  }, [currentEpisodeIndex, series.id]);
+src/components/consumer/ConsumerFeed.tsx:51:        const savedDocRef = doc(db, 'users', user.uid, 'savedEpisodes', `${series.id}_${currentEpisode.id}`);
+src/components/consumer/ConsumerFeed.tsx:55:          handleFirestoreError(err, OperationType.GET, `users/${user.uid}/savedEpisodes/${series.id}_${currentEpisode.id}`);
+src/components/consumer/ConsumerFeed.tsx:66:  }, [currentEpisodeIndex, series.id, currentEpisode]);
+src/components/consumer/ConsumerFeed.tsx:74:    const seedString = `${series.id}-${currentEpisode.id}-${currentEpisodeIndex}`;
+src/components/consumer/ConsumerFeed.tsx:95:  }, [series.id, currentEpisodeIndex, currentEpisode?.id]);
+src/components/consumer/ConsumerFeed.tsx:119:      const contentId = series.id;
+src/components/consumer/ConsumerFeed.tsx:132:      const contentRef = doc(db, 'series', contentId); // assuming 'series' or 'funnels', maybe check?
+src/components/consumer/ConsumerFeed.tsx:192:      await addDoc(collection(db, 'streams', series.id, 'messages'), {
+src/components/consumer/ConsumerFeed.tsx:199:      handleFirestoreError(error, OperationType.CREATE, `streams/${series.id}/messages`);
+src/components/consumer/ConsumerFeed.tsx:212:      collection(db, 'streams', series.id, 'messages'),
+src/components/consumer/ConsumerFeed.tsx:234:  }, [series.id]);
+src/components/consumer/ConsumerFeed.tsx:299:    const savedDocRef = doc(db, 'users', auth.currentUser.uid, 'savedEpisodes', `${series.id}_${currentEpisode.id}`);
+src/components/consumer/ConsumerFeed.tsx:308:          seriesId: series.id,
+src/components/consumer/ConsumerFeed.tsx:309:          seriesTitle: series.name,
+src/components/consumer/ConsumerFeed.tsx:310:          creatorName: series.creatorName || 'Pultanc Studios',
+src/components/consumer/ConsumerFeed.tsx:312:          thumbnail: currentEpisode.thumbnail || series.thumbnail || 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=400',
+src/components/consumer/ConsumerFeed.tsx:325:    if (currentEpisodeIndex < series.episodes.length - 1) {
+src/components/consumer/ConsumerFeed.tsx:360:            const funnelDocRef = doc(db, 'funnels', series.id);
+src/components/consumer/ConsumerFeed.tsx:375:          const allLocked = series.episodes.filter((e: any) => e.isLocked).map((e: any) => e.id);
+src/components/consumer/ConsumerFeed.tsx:381:        if (series.creatorId && pricePaid > 0) {
+src/components/consumer/ConsumerFeed.tsx:382:          const creatorUserRef = doc(db, 'users', series.creatorId);
+src/components/consumer/ConsumerFeed.tsx:405:    if (series?.status === 'under_review' || series?.status === 'banned') {
+src/components/consumer/ConsumerFeed.tsx:528:                  loop={currentEpisodeIndex === series.episodes.length - 1}
+src/components/consumer/ConsumerFeed.tsx:562:                           setDoc(doc(db, 'users', auth.currentUser.uid, 'watchHistory', series.id), {
+src/components/consumer/ConsumerFeed.tsx:563:                               seriesId: series.id,
+src/components/consumer/ConsumerFeed.tsx:564:                               seriesTitle: series.title || series.name,
+src/components/consumer/ConsumerFeed.tsx:567:                               thumbnailUrl: series.thumbnailUrl || 'https://images.unsplash.com/photo-1543807535-eceef0bc6504?auto=format&fit=crop&q=80&w=400',
+src/components/consumer/ConsumerFeed.tsx:685:         {series.episodes.map((ep: any, idx: number) => (
+src/components/consumer/ConsumerFeed.tsx:735:                      <div className="text-[11px] text-gray-400 line-clamp-1">"{series.episodes[currentEpisodeIndex + 1]?.title}"</div>
+src/components/consumer/ConsumerFeed.tsx:924:                      <span className="font-bold text-white text-xs">{(series.creator || 'D').charAt(0)}</span>
+src/components/consumer/ConsumerFeed.tsx:927:                <span className="text-sm font-bold text-white drop-shadow-md">{series.creator}</span>
+src/components/consumer/ConsumerFeed.tsx:932:                    onToast(`You are already subscribed to ${series.creator}!`);
+src/components/consumer/ConsumerFeed.tsx:962:            <h4 className="text-sm font-bold text-white leading-tight drop-shadow-md">{series.title}</h4>
+src/components/consumer/ConsumerFeed.tsx:965:              {series.description}
+src/components/consumer/ConsumerFeed.tsx:969:            {!isCurrentlyLocked && currentEpisodeIndex < series.episodes.length - 1 && (
+src/components/consumer/ConsumerFeed.tsx:1333:          filteredSeries.map(series => (
+src/components/consumer/ConsumerFeed.tsx:1335:              key={series.id} 
+src/components/consumer/ConsumerFeed.tsx:1336:              series={series} 
+src/components/creator/CreatorPortal.tsx:408:                            <input type="file" id="series-upload" className="hidden" onChange={(e) => e.target.files && setFile(e.target.files[0])} accept="video/mp4" />
+src/components/creator/CreatorPortal.tsx:409:                            <label htmlFor="series-upload" className="bg-white text-black px-6 py-3 rounded-full font-bold cursor-pointer hover:bg-gray-200 border border-gray-200 shadow-sm transition-colors">
+src/components/creator/CreatorPortal.tsx:561:                    {mockSeries.map((seriesItem) => (
+src/components/creator/CreatorPortal.tsx:562:                      <div key={seriesItem.id} className="space-y-3 bg-gray-50/50 border border-gray-100 rounded-2xl p-4 sm:p-5">
+src/components/creator/CreatorPortal.tsx:569:                              Climer: {seriesItem.title}
+src/components/creator/CreatorPortal.tsx:572:                              By {seriesItem.creator} • {seriesItem.episodes.length} Clips
+src/components/creator/CreatorPortal.tsx:578:                          {seriesItem.episodes.map((ep, idx) => {
+src/types.ts:21:  seriesId: string;
+src/types.ts:27:  seriesTitle?: string;
+src/data.ts:88:      seriesId: 's1',
+src/data.ts:94:      seriesTitle: "The Landlord's Secret",

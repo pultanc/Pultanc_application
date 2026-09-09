@@ -1,0 +1,11 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      // Allow public read access for video streaming & media playback
+      allow read: if true;
+      // Allow write access to authenticated users
+      allow write: if request.auth != null;
+    }
+  }
+}
