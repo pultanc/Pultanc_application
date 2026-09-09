@@ -1,0 +1,279 @@
+{
+  "entities": {
+    "Activity": {
+      "title": "Activity",
+      "description": "Records verified live transactions and activities across subscriptions, support, and content unlocks.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "reference": { "type": "string" },
+        "amount": { "type": "number", "description": "Standard amount in GHS" },
+        "netAmount": { "type": "number", "description": "70% creator net earnings in GHS" },
+        "currency": { "type": "string" },
+        "type": { "type": "string", "enum": ["subscribe", "support", "unlock", "ticket", "tip", "episode", "funnel", "clip"] },
+        "title": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "payerId": { "type": "string" },
+        "payerName": { "type": "string" },
+        "channel": { "type": "string" },
+        "status": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "paidAt": { "type": "string" }
+      },
+      "required": ["reference", "amount", "type", "timestamp", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Records earnings from paywalls, tips, and subscriptions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "ID of the user who paid." },
+        "creatorId": { "type": "string", "description": "ID of the creator who earned." },
+        "amount": { "type": "number", "description": "Amount in GHS." },
+        "type": { "type": "string", "enum": ["paywall", "tip", "subscription"], "description": "Type of transaction." },
+        "timestamp": { "type": "string", "description": "Time of transaction." }
+      },
+      "required": ["userId", "creatorId", "amount", "type", "timestamp"]
+    },
+    "Payout": {
+      "title": "Payout",
+      "description": "Records manual payouts to creators.",
+      "type": "object",
+      "properties": {
+        "creatorId": { "type": "string", "description": "ID of the creator." },
+        "creatorName": { "type": "string", "description": "Username of the creator." },
+        "creatorEmail": { "type": "string", "description": "Email of the creator." },
+        "amount": { "type": "number", "description": "Amount paid out in GHS." },
+        "status": { "type": "string", "enum": ["pending", "processed"], "description": "Status of payout." },
+        "timestamp": { "type": "string", "description": "Time of payout Request." },
+        "paymentType": { "type": "string", "description": "Type of MoMo or bank routing." },
+        "paymentNumber": { "type": "string", "description": "Recipient Mobile Money number or Bank details." }
+      },
+      "required": ["creatorId", "amount", "status", "timestamp"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User account alerts and notifications.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "number", "description": "Epoch timestamp when notification was sent." },
+        "read": { "type": "boolean" },
+        "type": { "type": "string", "enum": ["payout", "general"] }
+      },
+      "required": ["title", "text", "timestamp", "read"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "Real-time chat messages for streams or content.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "number", "description": "Server timestamp" }
+      },
+      "required": ["userId", "userName", "text", "timestamp"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Direct chat conversation between two users.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "lastMessage": { "type": "string" },
+        "lastSenderId": { "type": "string" },
+        "updatedAt": { "type": "number" },
+        "participantDetails": { "type": "object" }
+      },
+      "required": ["id", "participants", "updatedAt"]
+    },
+    "StreamHeart": {
+      "title": "Stream Heart",
+      "description": "Real-time heart taps for streams.",
+      "type": "object",
+      "properties": {
+        "count": { "type": "number" },
+        "updatedAt": { "type": "number", "description": "Server timestamp" }
+      },
+      "required": ["count", "updatedAt"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile metadata, avatar image, registration status, and settings.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "username": { "type": "string", "description": "Unique username handle" },
+        "displayName": { "type": "string", "description": "Display name" },
+        "name": { "type": "string", "description": "Full name" },
+        "country": { "type": "string", "description": "Country of origin" },
+        "countryCode": { "type": "string", "description": "Dialing country code" },
+        "phoneNumber": { "type": "string", "description": "Phone number" },
+        "phone": { "type": "string", "description": "Formatted phone number" },
+        "avatarUrl": { "type": "string", "description": "Avatar image URL" },
+        "photoURL": { "type": "string", "description": "Firebase auth photo URL" },
+        "bio": { "type": "string", "description": "Bio description" },
+        "paymentType": { "type": "string" },
+        "paymentNumber": { "type": "string" },
+        "bankName": { "type": "string" },
+        "branchName": { "type": "string" },
+        "isFirstTimer": { "type": "boolean", "description": "True when registering for the first time" },
+        "createdAt": { "type": "number", "description": "Epoch timestamp of registration" },
+        "lastLoginAt": { "type": "number", "description": "Epoch timestamp of most recent login" },
+        "role": { "type": "string", "description": "User role: user, creator, admin" },
+        "balance": { "type": "number", "description": "Wallet balance" },
+        "totalEarnings": { "type": "number", "description": "Lifetime earnings" },
+        "unlocksCount": { "type": "number" },
+        "supportsCount": { "type": "number" },
+        "subscribersCount": { "type": "number" },
+        "unlock_count": { "type": "number", "description": "Total content unlocks counter" },
+        "subscribe_count": { "type": "number", "description": "Total subscribers counter" },
+        "support_count": { "type": "number", "description": "Total support tips counter" },
+        "subscribePrice": { "type": "number", "description": "Configured subscription price in GHS" },
+        "creatorSubscribePrice": { "type": "number", "description": "Creator subscription price in GHS" },
+        "supportPrice": { "type": "number", "description": "Configured base support price in GHS" },
+        "baseSupportPrice": { "type": "number", "description": "Base support price in GHS" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "SavedCollection": {
+      "title": "Saved Collection",
+      "description": "Custom organizer folder for favorite video creator episodes.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "createdAt"]
+    },
+    "SavedEpisode": {
+      "title": "Saved Episode",
+      "description": "A favorite video creator episode stored inside a custom folder or uncategorized.",
+      "type": "object",
+      "properties": {
+        "episodeId": { "type": "string" },
+        "episodeTitle": { "type": "string" },
+        "seriesId": { "type": "string" },
+        "seriesTitle": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "collectionId": { "type": "string" },
+        "savedAt": { "type": "string" }
+      },
+      "required": ["episodeId", "episodeTitle", "seriesId", "seriesTitle", "creatorName", "savedAt"]
+    },
+    "BioFunnel": {
+      "title": "Bio Funnel",
+      "description": "Cliffhanger bio link created by creators.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "creatorHandle": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "price": { "type": "number" },
+        "videoUrl": { "type": "string" },
+        "lockTime": { "type": "number" },
+        "visits": { "type": "number" },
+        "unlocks": { "type": "number" },
+        "revenue": { "type": "number" },
+        "slug": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "title", "price", "videoUrl", "lockTime", "slug"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "User flags on inappropriate content to maintain platform safety.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "contentId": { "type": "string" },
+        "reporterId": { "type": "string" },
+        "reason": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "contentId", "reporterId", "reason"]
+    },
+    "VideoContent": {
+      "title": "Video Content",
+      "description": "Uploaded video media records for creator content and feed.",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "description": "ID of the creator user" },
+        "title": { "type": "string", "description": "Title of the video content" },
+        "subtitle": { "type": "string", "description": "Subtitle or summary" },
+        "description": { "type": "string", "description": "Detailed optional description of the video content for discoverability" },
+        "tags": { 
+          "type": "array", 
+          "items": { "type": "string" }, 
+          "description": "Keywords and hashtags for search indexing and discoverability" 
+        },
+        "video_url": { "type": "string", "description": "Public or signed video asset URL" },
+        "thumbnail_url": { "type": "string", "description": "Thumbnail preview image URL" },
+        "price_tier": { "type": "number", "description": "Pricing tier or amount in GHS" }
+      },
+      "required": ["user_id", "title", "subtitle", "video_url", "thumbnail_url", "price_tier"]
+    }
+  },
+  "firestore": {
+    "/videos/{videoId}": {
+      "schema": { "$ref": "#/entities/VideoContent" },
+      "description": "Uploaded video content records"
+    },
+    "/content/{contentId}": {
+      "schema": { "$ref": "#/entities/VideoContent" },
+      "description": "Published creator content records"
+    },
+    "/reports/{reportId}": {
+      "schema": { "$ref": "#/entities/Report" },
+      "description": "Flagged content and reports to maintain platform safety"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile settings and avatar"
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "User account notifications and alerts"
+    },
+    "/users/{userId}/savedCollections/{collectionId}": {
+      "schema": { "$ref": "#/entities/SavedCollection" },
+      "description": "User custom folders/collections for episodes"
+    },
+    "/users/{userId}/savedEpisodes/{savedId}": {
+      "schema": { "$ref": "#/entities/SavedEpisode" },
+      "description": "User saved favorite episodes mapped to folders"
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Ledger of all incoming money"
+    },
+    "/payouts/{payoutId}": {
+      "schema": { "$ref": "#/entities/Payout" },
+      "description": "Ledger of all outgoing money to creators"
+    },
+    "/streams/{streamId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Real-time messages for a stream/feed"
+    },
+    "/streams/{streamId}/stats/hearts": {
+      "schema": { "$ref": "#/entities/StreamHeart" },
+      "description": "Aggregated heart counts"
+    },
+    "/funnels/{funnelId}": {
+      "schema": { "$ref": "#/entities/BioFunnel" },
+      "description": "Public cliffhanger bio links/videos created by creators"
+    }
+  }
+}

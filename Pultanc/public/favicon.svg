@@ -1,0 +1,17 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#FE001A" />
+  <!-- Left Stem of P -->
+  <rect x="163" y="46" width="69" height="350" fill="#000000" />
+  
+  <!-- Top inner notch bracket -->
+  <path d="M 223 46 C 223 46 238 46 238 60 C 238 74 223 74 223 74 Z" fill="#000000" />
+  
+  <!-- Bottom inner notch bracket -->
+  <path d="M 223 235 C 223 235 238 235 238 249 C 238 263 223 263 223 263 Z" fill="#000000" />
+
+  <!-- Center Play Button Triangle -->
+  <polygon points="251,97 348,158 251,219" fill="#000000" />
+
+  <!-- Outer Right Semi-Circle Arch of P -->
+  <path d="M 346 53 C 420 53 420 263 346 263 L 346 230 C 395 230 395 86 346 86 Z" fill="#000000" />
+</svg>

@@ -1,0 +1,149 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email == "akosuasafoa96@gmail.com" && request.auth.token.email_verified == true;
+    }
+
+    // Transactions Collection
+    match /transactions/{transactionId} {
+      allow read: if isAdmin() || (isSignedIn() && (resource.data.creatorId == request.auth.uid || resource.data.userId == request.auth.uid || resource.data.payerId == request.auth.uid));
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Activities Collection (Live Payment Pipeline Tracking)
+    match /activities/{activityId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if isAdmin();
+    }
+
+    // Payouts Collection
+    match /payouts/{payoutId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.creatorId == request.auth.uid);
+      allow create: if isSignedIn() && 
+                    request.resource.data.creatorId == request.auth.uid &&
+                    request.resource.data.keys().hasAll(['creatorId', 'amount', 'status', 'timestamp']);
+      allow update: if isAdmin() || (isSignedIn() && resource.data.creatorId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+
+    // Verification Requests
+    match /verifications/{userId} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == userId);
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      allow update: if isAdmin() || (isSignedIn() && request.auth.uid == userId);
+      allow delete: if isAdmin();
+    }
+
+    match /users/{userId} {
+      allow read, write: if true;
+
+      // Notifications Subcollection
+      match /notifications/{notificationId} {
+        allow read, write: if true;
+      }
+
+      // User Transactions Subcollection
+      match /transactions/{txId} {
+        allow read, write: if true;
+      }
+
+      // Subscriptions Subcollection
+      match /subscriptions/{subId} {
+        allow read, write: if true;
+      }
+
+      match /watchHistory/{historyId} {
+        allow read, write: if true;
+      }
+
+      // Custom Collections Folders and Saved Episodes
+      match /savedCollections/{collectionId} {
+        allow read, write: if true;
+      }
+
+      match /savedEpisodes/{savedId} {
+        allow read, write: if true;
+      }
+    }
+
+    match /streams/{streamId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    match /streams/{streamId}/messages/{messageId} {
+      allow read: if true; 
+      allow create: if request.resource.data.keys().hasAll(['userId', 'userName', 'text', 'timestamp']) &&
+                    request.resource.data.text is string && request.resource.data.text.size() <= 1000 &&
+                    request.resource.data.userName is string && request.resource.data.userName.size() <= 100;
+      allow update: if false;
+      allow delete: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    match /streams/{streamId}/stats/hearts {
+      allow read: if true;
+      allow write: if true; 
+    }
+
+    // Funnels Collection
+    match /funnels/{funnelId} {
+      allow read, write: if true;
+    }
+
+    // Series Collection
+    match /series/{seriesId} {
+      allow read, write: if true;
+    }
+
+    // Climers Collection
+    match /climers/{climerId} {
+      allow read, write: if true;
+    }
+
+    // Clips Collection
+    match /clips/{clipId} {
+      allow read, write: if true;
+    }
+
+    // Videos Collection
+    match /videos/{videoId} {
+      allow read, write: if true;
+    }
+
+    // Content Collection
+    match /content/{contentId} {
+      allow read, write: if true;
+    }
+
+    // Reports Collection to maintain platform safety
+    match /reports/{reportId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.reporterId == request.auth.uid);
+      allow create: if isSignedIn() || true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Direct Messages and 1-on-1 Conversations
+    match /conversations/{conversationId} {
+      allow read, write: if true;
+
+      match /messages/{messageId} {
+        allow read, write: if true;
+      }
+    }
+
+    match /direct_messages/{messageId} {
+      allow read, write: if true;
+    }
+  }
+}
